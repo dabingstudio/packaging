@@ -191,14 +191,14 @@ nav {
 .lb-bg { position: absolute; inset: 0; background: rgba(8,8,8,.82); backdrop-filter: blur(18px); }
 .lb-box {
   position: relative; z-index: 1;
-  max-width: min(460px, 88vw); width: 100%;
+  max-width: min(900px, 92vw); width: 100%;
   display: flex; flex-direction: column; align-items: center;
   transform: scale(.9) translateY(20px);
   transition: transform .36s cubic-bezier(.23,1,.32,1);
 }
 .lb.open .lb-box { transform: scale(1) translateY(0); }
-.lb-img { width: 100%; aspect-ratio: 3/4; border-radius: 22px; overflow: hidden; box-shadow: 0 28px 70px rgba(0,0,0,.55); }
-.lb-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.lb-img { width: 100%; max-height: 80vh; border-radius: 22px; overflow: hidden; box-shadow: 0 28px 70px rgba(0,0,0,.55); display: flex; align-items: center; justify-content: center; }
+.lb-img img { width: 100%; height: 100%; max-height: 80vh; object-fit: contain; display: block; }
 .lb-meta { margin-top: 20px; text-align: center; color: #fff; }
 .lb-t {
   font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700;
@@ -405,7 +405,7 @@ footer {
   <p class="c-eye reveal">Start a Project</p>
   <h2 class="c-title reveal">Let's Make<br><em>Something Great.</em></h2>
   <p class="c-desc reveal">Have a packaging project in mind?<br>Let's bring your idea to life.</p>
-  <a href="/cdn-cgi/l/email-protection#432722212a2d242726302a242d303736272a2c03242e222a2f6d202c2e" class="c-btn reveal">
+  <a href="mailto:dabingdesignstudio@gmail.com" class="c-btn reveal">
   <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
     <path d="M2 4.5L9 10L16 4.5M2 4.5H16V13.5H2V4.5Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>Let's Start!
@@ -435,21 +435,21 @@ footer {
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 /* =====================================================
    DATA
 ===================================================== */
 var DATA = [
-  { tag:'Beverage',  name:'Citrus Refresh',   img:'images/project1.jpg' },
-  { tag:'Apparel',   name:'Dark Edition Tee', img:'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=800&q=90' },
-  { tag:'Lifestyle', name:'Cap Series',       img:'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=800&q=90' },
-  { tag:'Beauty',    name:'Glow Serum',       img:'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=800&q=90' },
-  { tag:'Fashion',   name:'White Minimal',    img:'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=90' },
-  { tag:'Food',      name:'Berry Blast',      img:'https://images.unsplash.com/photo-1502741224143-90386d7f8c82?w=800&q=90' },
-  { tag:'Cosmetics', name:'Glass Essence',    img:'https://images.unsplash.com/photo-1570194065650-d99fb4bedf0a?w=800&q=90' },
-  { tag:'Snacks',    name:'Urban Crunch',     img:'https://images.unsplash.com/photo-1621939514649-280e2ee25f60?w=800&q=90' },
-  { tag:'Coffee',    name:'Brew Co.',         img:'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=90' },
-  { tag:'Skincare',  name:'Pure Ritual',      img:'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&q=90' }
+  { tag:'Food',  name:'Tong Huat Giftbox',   img:'images/01.png' },
+  { tag:'Cooking Essentials',   name:'Organic Vinegar', img:'images/02.png' },
+  { tag:'Beverage', name:'GF Kombucha',       img:'images/03.png' },
+  { tag:'Food',    name:'SAFE Eggs',       img:'images/04.png' },
+  { tag:'Beverage',   name:'Organic Tea',    img:'images/05.jpg' },
+  { tag:'Beverage',      name:'SN Kombuchat',      img:'images/06.png' },
+  { tag:'Fruits', name:'CNY Giftbox',    img:'images/07.png' },
+  { tag:'Food',    name:'Take Away Box',     img:'images/08.jpg' },
+  { tag:'Pets',    name:'Protection Spray',         img:'images/09.png' },
+  { tag:'Food',  name:'SunShine Eggs',      img:'images/10.png' }
 ];
 
 /* =====================================================
