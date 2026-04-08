@@ -181,6 +181,44 @@ nav {
 }
 .hint-l { width: 32px; height: 1px; background: #ddd; }
 
+/* === PLAY VIDEO BUTTON === */
+.play-btn {
+  position: relative; z-index: 2;
+  margin-top: 18px;
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12px; color: #aaa; letter-spacing: .07em;
+  cursor: pointer;
+  transition: color .2s;
+  opacity: 0; animation: fadeUp .5s 1.3s forwards;
+}
+.play-btn:hover { color: var(--accent); }
+
+/* === YOUTUBE MODAL === */
+.yt-modal {
+  position: fixed; inset: 0; z-index: 900;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity .3s;
+}
+.yt-modal.open { opacity: 1; pointer-events: all; }
+.yt-bg {
+  position: absolute; inset: 0;
+  background: rgba(8,8,8,.88);
+  backdrop-filter: blur(18px);
+}
+.yt-box {
+  position: relative; z-index: 1;
+  width: min(900px, 92vw);
+  aspect-ratio: 16/9;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0,0,0,.6);
+  transform: scale(.92) translateY(20px);
+  transition: transform .36s cubic-bezier(.23,1,.32,1);
+}
+.yt-modal.open .yt-box { transform: scale(1) translateY(0); }
+.yt-box iframe { width: 100%; height: 100%; display: block; }
+
 /* === LIGHTBOX === */
 .lb {
   position: fixed; inset: 0; z-index: 800;
@@ -383,7 +421,28 @@ footer {
     <div class="hint-l"></div>drag to explore<div class="hint-l"></div>
   </div>
 
+  <div class="play-btn" id="playBtn">
+    play video
+    <svg width="9" height="9" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="2,1 13,7 2,13" fill="currentColor"/>
+    </svg>
+  </div>
+
 </section>
+
+<!-- YouTube Modal -->
+<div class="yt-modal" id="ytModal">
+  <div class="yt-bg" id="ytBg"></div>
+  <div class="yt-box">
+    <iframe id="ytFrame"
+      src=""
+      width="900" height="506"
+      frameborder="0"
+      allow="autoplay; encrypted-media"
+      allowfullscreen>
+    </iframe>
+  </div>
+</div>
 
 <!-- About -->
 <section id="about">
@@ -405,7 +464,7 @@ footer {
   <p class="c-eye reveal">Start a Project</p>
   <h2 class="c-title reveal">Let's Make<br><em>Something Great.</em></h2>
   <p class="c-desc reveal">Have a packaging project in mind?<br>Let's bring your idea to life.</p>
-  <a href="mailto:dabingdesignstudio@gmail.com" class="c-btn reveal">
+  <a href="/cdn-cgi/l/email-protection#aacecbc8c3c4cdcecfd9c3cdc4d9dedfcec3c5eacdc7cbc3c684c9c5c7" class="c-btn reveal">
   <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
     <path d="M2 4.5L9 10L16 4.5M2 4.5H16V13.5H2V4.5Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>Let's Start!
@@ -435,7 +494,7 @@ footer {
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* =====================================================
    DATA
 ===================================================== */
@@ -449,7 +508,14 @@ var DATA = [
   { tag:'Fruits', name:'CNY Giftbox',    img:'images/07.png' },
   { tag:'Food',    name:'Take Away Box',     img:'images/08.jpg' },
   { tag:'Pets',    name:'Protection Spray',         img:'images/09.png' },
-  { tag:'Food',  name:'SunShine Eggs',      img:'images/10.png' }
+  { tag:'Food',  name:'SunShine Eggs',      img:'images/10.png' },
+  { tag:'Beverage',  name:'SN Supplements',   img:'images/11.png' },
+  { tag:'Cooking Essentials',   name:'SN Oil', img:'images/12.png' },
+  { tag:'Beverage', name:'BG Better Coffee',       img:'images/13.png' },
+  { tag:'Beverage',    name:'BG Supplements',       img:'images/14.png' },
+  { tag:'Beverage',   name:'SN Elixir',    img:'images/15.png' },
+  { tag:'Fertilizer',      name:'Fertiga Fertilizer',      img:'images/16.png' },
+  { tag:'Food', name:'SN CNY Giftset',    img:'images/17.png' }
 ];
 
 /* =====================================================
@@ -457,7 +523,7 @@ var DATA = [
    6 sets of copies so loop never runs out
 ===================================================== */
 var N      = DATA.length;
-var COPIES = 6;
+var COPIES = 3;
 var TOTAL  = N * COPIES;
 var R      = 1700; /* arc radius in px */
 
@@ -699,6 +765,29 @@ var obs = new IntersectionObserver(function(entries) {
 }, { threshold: 0.15 });
 
 document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+
+/* =====================================================
+   YOUTUBE MODAL
+===================================================== */
+var ytModal = document.getElementById('ytModal');
+var ytFrame = document.getElementById('ytFrame');
+var ytBg    = document.getElementById('ytBg');
+var YT_URL  = 'https://www.youtube.com/embed/GS8djba0mps?autoplay=1';
+
+document.getElementById('playBtn').addEventListener('click', function() {
+  window.open('https://www.youtube.com/watch?v=GS8djba0mps', '_blank');
+});
+
+function closeYt() {
+  ytModal.classList.remove('open');
+  ytFrame.src = '';
+  document.body.style.overflow = '';
+}
+
+ytBg.addEventListener('click', closeYt);
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') { closeYt(); closeLb(); }
+});
 
 </script>
 </body>
